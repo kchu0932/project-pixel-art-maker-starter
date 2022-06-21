@@ -1,10 +1,28 @@
-// Select color input
-// Select size input
+const dimension = document.querySelector("#sizePicker");
+const submit = dimension[2];
+const table = document.querySelector("#pixelCanvas");
 
-// When size is submitted by the user, call makeGrid()
+function makeGrid(event) {
 
-function makeGrid() {
+    table.innerHTML = "";
 
-// Your code goes here!
+    const height = document.querySelector("#inputHeight").value;
+    const width = document.querySelector("#inputWidth").value;
 
+    for (i = 0; i < height; i++) {
+        let row = document.createElement("tr");
+        for (j = 0; j < width; j++) {
+            let newCell = document.createElement("td");
+            row.appendChild(newCell);
+            newCell.addEventListener("click", function () {
+                const color = document.querySelector("#colorPicker").value;
+                newCell.style.backgroundColor = color;
+            })
+        }
+        table.appendChild(row);
+    }
+
+    event.preventDefault();
 }
+
+const refresh = submit.addEventListener("click", makeGrid);
